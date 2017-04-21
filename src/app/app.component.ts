@@ -7,7 +7,6 @@ import { MusicService } from './music-collection.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [MusicService]
 })
 
 export class AppComponent implements OnInit {
@@ -17,7 +16,11 @@ export class AppComponent implements OnInit {
   constructor(private musicService: MusicService) {}
 
   getAlbumCollection(): void {
-    this.musicService.getAlbumCollection().then(albumCollection => this.albumCollection = albumCollection) 
+    this.musicService.getAlbumCollection()
+      .then(albumCollection => {
+        this.albumCollection = albumCollection.results
+        console.log(this.albumCollection)
+    })      
   }
 
   ngOnInit() : void {

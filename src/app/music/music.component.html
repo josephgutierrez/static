@@ -1,11 +1,13 @@
+<h4 class="sub-header">These are albums that we suggest. Click on an album to see more music by that artist.</h4>
 <ul>
   <li *ngFor="let album of albumCollection" (click)="showAlbum(album)">
     <div class="label">
       <h2>{{album.artistName}}</h2>
       <h3>{{album.collectionName}}</h3>
     </div>
-
-    <img [src]="album.artworkUrl100"/>
+    <div class="album-cover">
+      <img [src]="album.artworkUrl100"/>
+    </div>
   </li>
 </ul>
 

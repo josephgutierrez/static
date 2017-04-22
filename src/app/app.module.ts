@@ -1,22 +1,43 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import {MusicService } from './music-collection.service'
+import { MusicComponent } from './music/music.component';
+import { MusicService } from './music-collection.service';
+import { ArtistDetailsComponent } from './artist-details/artist-details.component';
+import { AlbumComponent } from './album/album.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MusicComponent,
+    ArtistDetailsComponent,
+    AlbumComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    RouterModule.forRoot([
+    {
+      path: '',
+      component: MusicComponent
+    },
+    {
+      path: 'artist/:id',
+      component: ArtistDetailsComponent
+    }
+])
   ],
-  providers: [MusicService],
-  bootstrap: [AppComponent]
+  providers: [
+    MusicService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

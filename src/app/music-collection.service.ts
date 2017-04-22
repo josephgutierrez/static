@@ -8,12 +8,19 @@ import { Music } from './music';
 @Injectable()
 
 export class MusicService {
-  private musicUrl = 'https://itunes.apple.com/search?term=jack+johnson&limit=5&callback=JSONP_CALLBACK';
-
+  private musicUrl = 'https://itunes.apple.com/search?term=dance&entity=album&limit=21&callback=JSONP_CALLBACK';
+  private artistUrl = 'https://itunes.apple.com/lookup?'
   constructor(private jsonp: Jsonp) {}
 
   getAlbumCollection() {
     return this.jsonp.request(this.musicUrl, {method: 'Get'})
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getArtistDetails(artistId) {
+    return this.jsonp.request(`${this.artistUrl}id=${artistId}&entity=album&callback=JSONP_CALLBACK`, {method: 'Get'})
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
